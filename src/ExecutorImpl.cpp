@@ -5,7 +5,7 @@ Executor* Executor::NewExecutor(const Pose& pose) noexcept
 {
     return new (std::nothrow) ExecutorImpl(pose);
 }
-ExecutorImpl::ExecutorImpl(const Pose& pose) noexcept
+ExecutorImpl::ExecutorImpl(const Pose& pose) noexcept : pose(pose)
 {
 }
 void ExecutorImpl::Execute(const std::string& commands) noexcept
