@@ -51,7 +51,7 @@ TEST(ExecutorTest, should_return_x_minus_1_given_command_M_and_facing_is_W)
     executor->Execute("M");
 
     // then
-    const Pose target({-1, 0, 'E'});
+    const Pose target({-1, 0, 'W'});
     ASSERT_EQ(target, executor->Query());
 }
 TEST(ExecutorTest, should_return_y_plus_1_given_command_M_and_facing_is_N)
@@ -63,7 +63,7 @@ TEST(ExecutorTest, should_return_y_plus_1_given_command_M_and_facing_is_N)
     executor->Execute("M");
 
     // then
-    const Pose target({0, 1, 'E'});
+    const Pose target({0, 1, 'N'});
     ASSERT_EQ(target, executor->Query());
 }
 TEST(ExecutorTest, should_return_y_minus_1_given_command_M_and_facing_is_S)
@@ -75,7 +75,7 @@ TEST(ExecutorTest, should_return_y_minus_1_given_command_M_and_facing_is_S)
     executor->Execute("M");
 
     // then
-    const Pose target({0, -1, 'E'});
+    const Pose target({0, -1, 'S'});
     ASSERT_EQ(target, executor->Query());
 }
 }  // namespace adas
