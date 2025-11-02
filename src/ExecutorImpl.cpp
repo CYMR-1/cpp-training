@@ -33,8 +33,43 @@ void ExecutorImpl::Execute(const std::string& commands) noexcept
                         break;
                 }
                 break;
-            default:
+            case 'L':
+                switch(pose.heading)
+                {
+                    case 'N':
+                        pose.heading = 'W';
+                        break;
+                    case 'W':
+                        pose.heading = 'S';
+                        break;
+                    case 'S':
+                        pose.heading = 'E';
+                        break;
+                    case 'E':
+                        pose.heading = 'N';
+                        break;
+                    default:
+                        break;
+                }
                 break;
+            case 'R':
+                switch(pose.heading)
+                {
+                    case 'N':
+                        pose.heading = 'E';
+                        break;
+                    case 'E':
+                        pose.heading = 'S';
+                        break;
+                    case 'S':
+                        pose.heading = 'W';
+                        break;
+                    case 'W':
+                        pose.heading = 'N';
+                        break;
+                    default:
+                        break;
+                }
         }
     }
 }
