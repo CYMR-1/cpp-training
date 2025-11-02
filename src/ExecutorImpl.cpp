@@ -15,23 +15,7 @@ void ExecutorImpl::Execute(const std::string& commands) noexcept
         switch(command)
         {
             case 'M':
-                switch(pose.heading)
-                {
-                    case 'N':
-                        ++pose.y;
-                        break;
-                    case 'S':
-                        --pose.y;
-                        break;
-                    case 'E':
-                        ++pose.x;
-                        break;
-                    case 'W':
-                        --pose.x;
-                        break;
-                    default:
-                        break;
-                }
+                Move();
                 break;
             case 'L':
                 switch(pose.heading)
@@ -77,4 +61,25 @@ Pose ExecutorImpl::Query() const noexcept
 {
     return pose;
 }
-}  // namespace adas
+void ExecutorImpl::Move() noexcept
+{
+    switch(pose.heading)
+    {
+        case 'N':
+            pose.y += 1;
+            break;
+        case 'S':
+            pose.y -= 1;
+            break;
+        case 'E':
+            pose.x += 1;
+            break;
+        case 'W':
+            pose.x -= 1;
+            break;
+        default:
+            break;
+    }
+}
+}
+ // namespace adas
