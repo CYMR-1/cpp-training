@@ -29,4 +29,53 @@ TEST(ExecutorTest, should_return_default_pose_when_without_init_and_command)
     ASSERT_EQ(target, executor->Query());
 }
 
+// M
+TEST(ExecutorTest, should_return_x_plus_1_given_command_M_and_facing_is_E)
+{
+    // given
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'}));
+
+    // when
+    executor->Execute("M");
+
+    // then
+    const Pose target({1, 0, 'E'});
+    ASSERT_EQ(target, executor->Query());
+}
+TEST(ExecutorTest, should_return_x_minus_1_given_command_M_and_facing_is_W)
+{
+    // given
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'W'}));
+
+    // when
+    executor->Execute("M");
+
+    // then
+    const Pose target({-1, 0, 'E'});
+    ASSERT_EQ(target, executor->Query());
+}
+TEST(ExecutorTest, should_return_y_plus_1_given_command_M_and_facing_is_N)
+{
+    // given
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+
+    // when
+    executor->Execute("M");
+
+    // then
+    const Pose target({0, 1, 'E'});
+    ASSERT_EQ(target, executor->Query());
+}
+TEST(ExecutorTest, should_return_y_minus_1_given_command_M_and_facing_is_S)
+{
+    // given
+    std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'S'}));
+
+    // when
+    executor->Execute("M");
+
+    // then
+    const Pose target({0, -1, 'E'});
+    ASSERT_EQ(target, executor->Query());
+}
 }  // namespace adas
