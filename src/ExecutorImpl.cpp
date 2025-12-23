@@ -10,69 +10,67 @@ ExecutorImpl::ExecutorImpl(const Pose& pose) noexcept : pose(pose)
 }
 void ExecutorImpl::Execute(const std::string& commands) noexcept
 {
-    for(const auto command : commands)
-    {
-        switch(command)
+    for (const auto cmd : commands) {
+        if (cmd == 'M')
         {
-            case 'M':
-                switch(pose.heading)
-                {
-                    case 'N':
-                        ++pose.y;
-                        break;
-                    case 'S':
-                        --pose.y;
-                        break;
-                    case 'E':
-                        ++pose.x;
-                        break;
-                    case 'W':
-                        --pose.x;
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 'L':
-                switch(pose.heading)
-                {
-                    case 'N':
-                        pose.heading = 'W';
-                        break;
-                    case 'W':
-                        pose.heading = 'S';
-                        break;
-                    case 'S':
-                        pose.heading = 'E';
-                        break;
-                    case 'E':
-                        pose.heading = 'N';
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            case 'R':
-                switch(pose.heading)
-                {
-                    case 'N':
-                        pose.heading = 'E';
-                        break;
-                    case 'E':
-                        pose.heading = 'S';
-                        break;
-                    case 'S':
-                        pose.heading = 'W';
-                        break;
-                    case 'W':
-                        pose.heading = 'N';
-                        break;
-                    default:
-                        break;
-                }
+            if (pose.heading == 'E')
+            {
+                ++pose.x;
+            }
+            else if (pose.heading == 'W')
+            {
+                --pose.x;
+            }
+            else if (pose.heading == 'N')
+            {
+                ++pose.y;
+            }
+            else if (pose.heading == 'S')
+            {
+                --pose.y;
+            }
+        }
+        else if (cmd == 'L')
+        {
+            if (pose.heading == 'E')
+            {
+                pose.heading = 'N';
+            }
+            else if (pose.heading == 'N')
+            {
+                pose.heading = 'W';
+            }
+            else if (pose.heading == 'W')
+            {
+                pose.heading = 'S';
+            }
+            else if (pose.heading == 'S')
+            {
+                pose.heading = 'E';
+            }
+        }
+        else if (cmd == 'R')
+        {
+            if (pose.heading == 'E')
+            {
+                pose.heading = 'S';
+            }
+            else if (pose.heading == 'S')
+            {
+                pose.heading = 'W';
+            }
+            else if (pose.heading == 'W')
+            {
+                pose.heading = 'N';
+            }
+            else if (pose.heading == 'N')
+            {
+                pose.heading = 'E';
+            }
         }
     }
 }
+
 Pose ExecutorImpl::Query() const noexcept
 {
     return pose;
