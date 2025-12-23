@@ -16,11 +16,14 @@ public:
 
 private:
     Pose pose;
+    bool fast{false};
 
 private:
     void Move(void) noexcept;
     void TurnLeft(void) noexcept;
     void TurnRight(void) noexcept;
+    void Fast(void) noexcept;
+    bool IsFast(void) const noexcept;
     class ICommand
     {
     public:
@@ -32,6 +35,9 @@ private:
     public:
         void DoOperate(ExecutorImpl& executor) const noexcept override
         {
+            if (executor.IsFast()) {
+                executor.Move();
+            }
             executor.Move();
         }
     };
@@ -49,6 +55,14 @@ private:
         void DoOperate(ExecutorImpl& executor) const noexcept override
         {
             executor.TurnRight();
+        }
+    };
+    class FastCommand final : public ICommand
+    {
+    public:
+        void DoOperate(ExecutorImpl& executor) const noexcept override
+        {
+            executor.Fast();
         }
     };
 };
