@@ -17,6 +17,8 @@ public:
     bool IsReverse(void) const noexcept;
     void Fast(void) noexcept;
     bool IsFast(void) const noexcept;
+    void Forward(void) noexcept;
+    void Backward(void) noexcept;
     Pose Query(void) const noexcept;
 
 private:

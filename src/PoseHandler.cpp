@@ -6,14 +6,10 @@ PoseHandler::PoseHandler(const Pose& pose) noexcept : pose(pose)
 }
 void PoseHandler::Move() noexcept
 {
-    if (pose.heading == 'E') {
-        ++pose.x;
-    } else if (pose.heading == 'W') {
-        --pose.x;
-    } else if (pose.heading == 'N') {
-        ++pose.y;
-    } else if (pose.heading == 'S') {
-        --pose.y;
+    if (reverse) {
+        Backward();
+    } else {
+        Forward();
     }
 }
 void PoseHandler::TurnLeft() noexcept
@@ -44,6 +40,15 @@ Pose PoseHandler::Query() const noexcept
 {
     return pose;
 }
+void PoseHandler::Reverse() noexcept
+{
+    reverse = !reverse;
+}
+
+bool PoseHandler::IsReverse() const noexcept
+{
+    return reverse;
+}
 void PoseHandler::Fast() noexcept
 {
     fast = !fast;
@@ -51,5 +56,28 @@ void PoseHandler::Fast() noexcept
 bool PoseHandler::IsFast() const noexcept
 {
     return fast;
+}
+void PoseHandler::Forward(void) noexcept
+{
+    if (pose.heading == 'E')
+        ++pose.x;
+    else if (pose.heading == 'W')
+        --pose.x;
+    else if (pose.heading == 'N')
+        ++pose.y;
+    else if (pose.heading == 'S')
+        --pose.y;
+}
+
+void PoseHandler::Backward(void) noexcept
+{
+    if (pose.heading == 'E')
+        --pose.x;
+    else if (pose.heading == 'W')
+        ++pose.x;
+    else if (pose.heading == 'N')
+        --pose.y;
+    else if (pose.heading == 'S')
+        ++pose.y;
 }
 }  // namespace adas
