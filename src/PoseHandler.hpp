@@ -5,7 +5,7 @@ namespace adas
 class PoseHandler final
 {
 public:
-    PoseHandler(const Pose& pose) noexcept;
+    PoseHandler(const Pose& pose, VehicleType type = VehicleType::Normal) noexcept;
     PoseHandler(const PoseHandler&) = delete;
     PoseHandler& operator=(const PoseHandler&) = delete;
 
@@ -20,10 +20,13 @@ public:
     void Forward(void) noexcept;
     void Backward(void) noexcept;
     Pose Query(void) const noexcept;
+    void SetVehicleType(VehicleType type) noexcept;
+    VehicleType GetVehicleType(void) const noexcept;
 
 private:
     Pose pose;
     bool fast{false};
     bool reverse{false};
+    VehicleType vehicleType{VehicleType::Normal};
 };
 }  // namespace adas

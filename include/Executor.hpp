@@ -7,11 +7,18 @@ struct Pose {
     int y;
     char heading;
 };
+
+enum class VehicleType {
+    Normal,     // 普通车
+    SportsCar,  // 跑车
+    Bus         // 公交车
+};
+
 class Executor
 {
 public:
     // Caller should delete *executor when it is no longer needed.
-    static Executor* NewExecutor(const Pose& pose={0,0,'N'}) noexcept;
+    static Executor* NewExecutor(const Pose& pose = {0, 0, 'N'}, VehicleType type = VehicleType::Normal) noexcept;
 
 public:
     Executor(void) = default;
@@ -22,5 +29,6 @@ public:
 public:
     virtual void Execute(const std::string& command) noexcept = 0;
     virtual Pose Query(void) const noexcept = 0;
+    virtual void SetVehicleType(VehicleType type) noexcept = 0;
 };
 }  // namespace adas
