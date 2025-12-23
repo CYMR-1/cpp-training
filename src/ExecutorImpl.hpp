@@ -16,6 +16,7 @@ public:
 
 private:
     void Move(void) noexcept;
+    void TurnLeft(void) noexcept;
     Pose pose;
 };
 }  // namespace adas
